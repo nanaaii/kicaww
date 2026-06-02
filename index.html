@@ -194,7 +194,7 @@
             background: white;
             padding: 14px 14px 20px 14px;
             border-radius: 4px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
             transform: rotate(-1.5deg);
             transition: transform 0.3s ease;
         }
@@ -292,11 +292,11 @@
             overflow-y: auto;
         }
 
-#card1.fullscreen .card-back, 
-#card2.fullscreen .card-back, 
-#card3.fullscreen .card-back {
-    background: #fff1f2; /* Warna Pink Muda Pastel yang manis */
-}
+        #card1.fullscreen .card-back, 
+        #card2.fullscreen .card-back, 
+        #card3.fullscreen .card-back {
+            background: #fff1f2;
+        }
 
         .card.fullscreen .card-front{
             display: none;
@@ -322,26 +322,27 @@
         /* MUSIC DESIGN */
         /* ================================= */
         .music-card-physical { 
-            background: #fcfbf9; 
+            background: #fcfbf9;
             border-radius: 24px; 
             padding: 22px; 
             width: 100%;
             max-width: 310px; 
             margin: 0 auto;
             box-shadow: 0 15px 35px rgba(0,0,0,0.06); 
-            text-align: left; 
+            text-align: left;
             border: 1px solid rgba(0,0,0,0.02);
             font-family: 'Plus Jakarta Sans', sans-serif;
             cursor: default;
         }
         .music-card-photo { 
-            width: 100%; 
+            width: 100%;
             aspect-ratio: 1.15/1; 
             border-radius: 16px; 
             overflow: hidden; 
             margin-bottom: 12px; 
             border: 1.5px solid #2e2e2e;
             background: #f1f5f9;
+            touch-action: pan-y; /* Supaya geser layar tidak bentrok vertikal */
         }
         .music-card-photo img { width: 100%; height: 100%; object-fit: cover; }
         
@@ -356,16 +357,16 @@
         .card-heart-icon { color: #f43f5e; font-size: 14px; }
 
         .waveform { 
-            width: 100%; 
+            width: 100%;
             height: 45px; 
             margin: 15px 0; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            gap: 4px; 
+            gap: 4px;
         }
         .wave-bar { 
-            width: 4px; 
+            width: 4px;
             height: 10px;
             background: linear-gradient(to bottom, #f43f5e, #be185d); 
             border-radius: 4px; 
@@ -378,9 +379,9 @@
         .wave-bar:nth-child(4n) { animation-delay: 0.6s; }
         
         .timeline-container { margin: 12px 0; }
-        .timeline-bar { width: 100%; height: 3px; background: #e2e8f0; border-radius: 2px; position: relative; }
-        .timeline-progress { width: 38%; height: 100%; background: #1e293b; border-radius: 2px; position: relative; }
-        .timeline-dot { position: absolute; right: -3px; top: -2.5px; width: 8px; height: 8px; background: #1e293b; border-radius: 50%; }
+        .timeline-bar { width: 100%; height: 5px; background: #e2e8f0; border-radius: 5px; position: relative; cursor: pointer; }
+        .timeline-progress { width: 0%; height: 100%; background: #f43f5e; border-radius: 5px; position: relative; pointer-events: none; }
+        .timeline-dot { position: absolute; right: -4px; top: -2px; width: 9px; height: 9px; background: #be185d; border-radius: 50%; }
         .time-stamps { display: flex; justify-content: space-between; font-size: 11px; color: #64748b; margin-top: 5px; font-weight: 500; }
 
         .playback-controls { display: flex; align-items: center; justify-content: center; gap: 35px; margin-top: 15px; }
@@ -419,304 +420,259 @@
         }
 
         /* ================================= */
-        /* PREMIUM 3D ENVELOPE (PERBAIKAN SURAT KE TENGAH) */
+        /* PREMIUM 3D ENVELOPE */
         /* ================================= */
-       /* Container Utama Area Amplop */
-.envelope-wrapper {
-    position: relative;
-    width: 100%;
-    height: 380px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        .envelope-wrapper {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-/* Base Desain Kotak Amplop */
-#envelope {
-    position: relative;
-    width: 300px;
-    height: 200px;
-    background: #fcfaf2;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.03);
-    cursor: pointer;
-    z-index: 2;
-    transition: all 0.4s ease;
-}
+        #envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background: #fcfaf2;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
 
-#envelope::after {
-    content: ''; position: absolute; inset: 0;
-    background: #f3eee0;
-    clip-path: polygon(0 100%, 100% 100%, 50% 52%);
-    border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;
-    z-index: 3;
-}
-#envelope::before {
-    content: ''; position: absolute; inset: 0;
-    background: #faf7ed;
-    clip-path: polygon(0 0, 0 100%, 50% 52%);
-    border-bottom-left-radius: 16px;
-    z-index: 2;
-}
-.envelope-wings {
-    position: absolute; inset: 0;
-    background: #ede8da;
-    clip-path: polygon(100% 0, 100% 100%, 50% 52%);
-    border-bottom-right-radius: 16px;
-    z-index: 2;
-}
-.envelope-flap {
-    width: 100%; height: 110px;
-    background: #e5dec9;
-    position: absolute; top: 0; left: 0;
-    transform-origin: top;
-    transition: transform 0.5s ease;
-    z-index: 4;
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-    border-top-left-radius: 4px; border-top-right-radius: 4px;
-}
-.envelope-heart-lock {
-    position: absolute; top: 52%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 28px; color: #d4af37; z-index: 10;
-    text-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-}
+        #envelope::after {
+            content: ''; position: absolute; inset: 0;
+            background: #f3eee0;
+            clip-path: polygon(0 100%, 100% 100%, 50% 52%);
+            border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;
+            z-index: 3;
+        }
+        #envelope::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: #faf7ed;
+            clip-path: polygon(0 0, 0 100%, 50% 52%);
+            border-bottom-left-radius: 16px;
+            z-index: 2;
+        }
+        .envelope-wings {
+            position: absolute; inset: 0;
+            background: #ede8da;
+            clip-path: polygon(100% 0, 100% 100%, 50% 52%);
+            border-bottom-right-radius: 16px;
+            z-index: 2;
+        }
+        .envelope-flap {
+            width: 100%; height: 110px;
+            background: #e5dec9;
+            position: absolute; top: 0; left: 0;
+            transform-origin: top;
+            transition: transform 0.5s ease;
+            z-index: 4;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            border-top-left-radius: 4px; border-top-right-radius: 4px;
+        }
+        .envelope-heart-lock {
+            position: absolute; top: 52%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 28px; color: #d4af37; z-index: 10;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
 
-/* KERTAS SURAT: Muncul Mengembang Otomatis Tepat di Tengah Layar */
-.letter {
-    background: #fffcf5;
-    padding: 30px 24px;
-    border-radius: 24px;
-    position: absolute;
-    width: 350px;
-    max-width: 90vw;
-    /* Efek Awal: Mengecil dan Menghilang di Tengah */
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-index: 1;
-    text-align: left;
-    border: 2px solid #e5dec9;
-    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15);
-    pointer-events: none;
-}
+        .letter {
+            background: #fffcf5;
+            padding: 30px 24px;
+            border-radius: 24px;
+            position: absolute;
+            width: 350px;
+            max-width: 90vw;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 1;
+            text-align: left;
+            border: 2px solid #e5dec9;
+            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15);
+            pointer-events: none;
+        }
 
-.letter h3 {
-    color: #1e293b; font-size: 1.2rem; margin-bottom: 12px;
-    font-family: 'Playfair Display', serif; text-align: center;
-}
-.letter p {
-    font-size: 0.88rem; line-height: 1.7; margin-bottom: 12px; color: #475569;
-}
+        .letter h3 {
+            color: #1e293b; font-size: 1.2rem;
+            margin-bottom: 12px;
+            font-family: 'Playfair Display', serif; text-align: center;
+        }
+        .letter p {
+            font-size: 0.88rem; line-height: 1.7; margin-bottom: 12px;
+            color: #475569;
+        }
 
-/* Transisi Saat Amplop Dibuka via JavaScript */
-#envelope.open .envelope-flap {
-    transform: rotateX(180deg);
-    z-index: 1;
-}
-#envelope.open .envelope-heart-lock {
-    opacity: 0; transform: translate(-50%, -50%) scale(0);
-}
+        #envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+        #envelope.open .envelope-heart-lock {
+            opacity: 0; transform: translate(-50%, -50%) scale(0);
+        }
 
-/* Surat Aktif Meluncur Mengembang Pas di Tengah Grid */
-#envelope.open ~ .letter {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-    z-index: 50;
-    pointer-events: auto;
-}
+        #envelope.open ~ .letter {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            z-index: 50;
+            pointer-events: auto;
+        }
 
         /* ================================= */
         /* FLOATING KASET WIDGET */
         /* ================================= */
-       /* ================================= */
-#floatingPlayer {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 1000;
-    cursor: pointer;
-    /* Menghilangkan background putih dan padding luar */
-    background: transparent; 
-    padding: 0;
-    border: none;
-    box-shadow: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+        #floatingPlayer {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 1000;
+            cursor: pointer;
+            background: transparent;
+            padding: 0;
+            border: none;
+            box-shadow: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-#floatingPlayer:active { 
-    transform: scale(0.9); 
-}
+        #floatingPlayer:active { 
+            transform: scale(0.9); 
+        }
 
-/* Bingkai Foto Dibuat Bulat Sempurna dengan Bayangan Indah */
-.widget-photo-frame { 
-    width: 55px; /* Ukuran bulat yang pas */
-    height: 55px; 
-    border-radius: 50%; 
-    overflow: hidden; 
-    border: 2.5px solid #1e293b; /* Outline gelap estetik */
-    flex-shrink: 0; 
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
-}
+        /* Sembunyi total di awal (loading & page 2) */
+        .hidden-player {
+            display: none !important;
+        }
 
-.widget-photo-frame img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-}
+        .widget-photo-frame { 
+            width: 55px;
+            height: 55px; 
+            border-radius: 50%; 
+            overflow: hidden; 
+            border: 2.5px solid #1e293b;
+            flex-shrink: 0; 
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
+        }
 
-/* Animasi Berputar Musik */
-.widget-photo-frame.spinning img { 
-    animation: spinImg 4s linear infinite; 
-}
-@keyframes spinImg { 
-    from { transform: rotate(0deg); } 
-    to { transform: rotate(360deg); } 
-}
+        .widget-photo-frame img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+        }
 
-/* Menyembunyikan teks info judul dan artis sepenuhnya */
-.widget-info { 
-    display: none !important; 
-}
+        .widget-photo-frame.spinning img { 
+            animation: spinImg 4s linear infinite;
+        }
+        @keyframes spinImg { 
+            from { transform: rotate(0deg); } 
+            to { transform: rotate(360deg); } 
+        }
 
-/* Bersihkan toast bawaan lama agar tidak mengganggu layout */
-.player-toast {
-    display: none !important;
-}
-        .player-toast.show-toast { opacity: 1; transform: translateY(0); }
+        .widget-info { 
+            display: none !important;
+        }
+
+        .player-toast {
+            display: none !important;
+        }
 
         /* ================================= */
-/* ENDING CONTAINER */
-/* ================================= */
+        /* ENDING CONTAINER */
+        /* ================================= */
+        .ending-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            padding: 30px 20px;
+            position: relative;
+        }
 
-.ending-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    min-height: 100vh;
-    width: 100%;
-    max-width: 500px;
+        #catMessage {
+            opacity: 0;
+            transform: translateY(-15px);
+            width: 100%;
+            text-align: center;
+            font-size: 0.92rem;
+        }
 
-    margin: auto;
-    padding: 30px 20px;
+        #catMessage.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 1s ease;
+        }
 
-    position: relative;
-}
+        #catMessage h2 {
+            font-size: 1.35rem;
+            margin-bottom: 15px;
+        }
 
-/* ================================= */
-/* PESAN ATAS */
-/* ================================= */
+        .character-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 25px;
+            margin-bottom: 35px;
+        }
 
-#catMessage {
-    opacity: 0;
-    transform: translateY(-15px);
+        #cuteCatGif {
+            width: 170px;
+            max-width: 80%;
+            height: auto;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
 
-    width: 100%;
-    text-align: center;
+        #cuteCatGif.show-gif {
+            opacity: 1;
+            transform: scale(1);
+        }
 
-    font-size: 0.92rem;
-}
+        #finalText {
+            opacity: 0;
+            transform: translateY(15px);
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #64748b;
+        }
 
-#catMessage.show {
-    opacity: 1;
-    transform: translateY(0);
-    transition: all 1s ease;
-}
+        #finalText.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 1s ease;
+        }
 
-#catMessage h2 {
-    font-size: 1.35rem;
-    margin-bottom: 15px;
-}
-
-/* ================================= */
-/* GIF KUCING */
-/* ================================= */
-
-.character-box {
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-
-    margin-top: 25px;
-    margin-bottom: 35px;
-}
-
-#cuteCatGif {
-
-    width: 170px;
-    max-width: 80%;
-
-    height: auto;
-
-    opacity: 0;
-    transform: scale(0.8);
-
-    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-#cuteCatGif.show-gif {
-
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* ================================= */
-/* TEKS PALING BAWAH */
-/* ================================= */
-
-#finalText {
-
-    opacity: 0;
-    transform: translateY(15px);
-
-    width: 100%;
-
-    text-align: center;
-
-    margin-top: 10px;
-
-    font-size: 0.9rem;
-    font-weight: 500;
-
-    color: #64748b;
-}
-
-#finalText.show {
-
-    opacity: 1;
-    transform: translateY(0);
-
-    transition: all 1s ease;
-}
-
-/* ================================= */
-/* MOBILE */
-/* ================================= */
-
-@media (max-width: 768px) {
-
-    #cuteCatGif {
-        width: 150px;
-    }
-
-    #catMessage h2 {
-        font-size: 1.2rem;
-    }
-}
+        @media (max-width: 768px) {
+            #cuteCatGif {
+                width: 150px;
+            }
+            #catMessage h2 {
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -726,17 +682,17 @@
     <audio id="instrumentalMusic" loop>
         <source src="assets/music/background.mp3" type="audio/mpeg">
     </audio>
-    <audio id="playlistPlayer" onended="changeSong('next')"></audio>
+    <audio id="playlistPlayer"></audio>
 
- <div id="floatingPlayer" class="hidden">
-    <div class="widget-photo-frame" id="widgetFrame">
-        <img id="widgetPhoto" src="assets/photos/photo1.jpg" alt="Music Art">
-    </div>
-</div>
-        <div class="widget-info">
-            <div class="widget-title" id="widgetTitle">Risk It All</div>
-            <div class="widget-artist" id="widgetArtist">The Us</div>
+    <div id="floatingPlayer" class="hidden-player" onclick="togglePlaylistPlay()">
+        <div class="widget-photo-frame" id="widgetFrame">
+            <img id="widgetPhoto" src="photos/akuw.jpg" alt="Music Art">
         </div>
+    </div>
+
+    <div class="widget-info">
+        <div class="widget-title" id="widgetTitle">Risk It All</div>
+        <div class="widget-artist" id="widgetArtist">The Us</div>
     </div>
 
     <section id="page1" class="page active">
@@ -760,16 +716,16 @@
             </div>
             <h2>alowww🤍</h2>
             <p> First of all, thank you ya udah mau buka dan ngeluangin waktu buat lihat web random yang aku bikin ini wkwk.
-And before we continue...
-aku mau cerita dikit kenapa aku milih foto ini.
-Jujur aja, aku milih foto ini karena LUCU BANGET SUKAK. Simple sih, tapi somehow bikin aku senyum sendiri.
-Terus makasih juga ya buat bunganya. Aku ga nyangka bakal dapet bunga, jadi pas nerima tuh aku cuma bisa mikir,
-"oh... that's actually really sweet."
-Mungkin buat orang lain itu hal kecil, tapi buat aku, it's something that I'll remember for a long time.
-So before kita lanjut ke bagian berikutnya...
-I just want you to know that I genuinely enjoyed spending time with you.
-Okayyy, enough being soft.
-Klik next ya sebelum aku jadi makin alay. 🤍✨ </p>
+            And before we continue...
+            aku mau cerita dikit kenapa aku milih foto ini.
+            Jujur aja, aku milih foto ini karena LUCU BANGET SUKAK. Simple sih, tapi somehow bikin aku senyum sendiri.
+            Terus makasih juga ya buat bunganya. Aku ga nyangka bakal dapet bunga, jadi pas nerima tuh aku cuma bisa mikir, "oh... that's actually really sweet."
+            Mungkin buat orang lain itu hal kecil, tapi buat aku, it's something that I'll remember for a long time.
+            So before kita lanjut ke bagian berikutnya...
+            I just want you to know that I genuinely enjoyed spending time with you.
+            Okayyy, enough being soft.
+            Klik next ya sebelum aku jadi makin alay.
+            🤍✨ </p>
             <button class="next-btn" onclick="goToPage(3)">Next ➜</button>
         </div>
     </section>
@@ -784,13 +740,7 @@ Klik next ya sebelum aku jadi makin alay. 🤍✨ </p>
                     <div class="card-back">
                         <img src="photos/cute.jpg" alt="Smile" class="card-avatar">
                         <div class="card-back-title">Lucky Charm</div>
-                        <p>Kalau suatu hari lagi capek,
-lagi bete,
-atau lagi ngerasa semuanya ribet...
-anggap aja foto ini sebagai pengingat kecil bahwa ada seseorang yang selalu nyemangatin kamu dari jauh. 🤍
-Keep going, okay?
-You're doing better than you think.
-Dan kalau suatu saat kamu lagi ngerasa sendirian, jangan lupa kalau masih ada aku yang bakal dengerin cerita random kamu, meskipun kadang aku telat bales wkwk.</p>
+                        <p>Kalau suatu hari lagi capek, lagi bete, atau lagi ngerasa semuanya ribet... anggap aja web ini sebagai pengingat kecil bahwa ada seseorang yang selalu nyemangatin kamu dari jauh. 🤍 Keep going, okay? You're doing better than you think. Dan kalau suatu saat kamu lagi ngerasa sendirian, jangan lupa kalau masih ada aku yang bakal dengerin cerita random kamu, meskipun kadang aku telat bales wkwk.</p>
                     </div>
                 </div>
 
@@ -799,14 +749,14 @@ Dan kalau suatu saat kamu lagi ngerasa sendirian, jangan lupa kalau masih ada ak
                     <div class="card-back">
                         <div class="music-card-physical" onclick="event.stopPropagation()">
                             <div class="music-card-photo" id="cardSongPhotoFrame">
-                                <img id="cardSongPhoto" src="assets/photos/photo1.jpg" alt="Song Art">
+                                <img id="cardSongPhoto" src="photos/akuw.jpg" alt="Song Art">
                             </div>
                             <div class="song-info">
                                 <div class="song-title-area">
                                     <h3 id="cardSongTitle">Risk It All</h3>
                                     <span class="card-heart-icon">❤️</span>
                                 </div>
-                                <p id="cardSongArtist">The Us</p>
+                                <p id="cardSongArtist">Bruno Mars</p>
                             </div>
                             <div class="waveform" id="cardWaveform">
                                 <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
@@ -814,10 +764,10 @@ Dan kalau suatu saat kamu lagi ngerasa sendirian, jangan lupa kalau masih ada ak
                                 <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
                             </div>
                             <div class="timeline-container">
-                                <div class="timeline-bar">
-                                    <div class="timeline-progress"><div class="timeline-dot"></div></div>
+                                <div class="timeline-bar" id="musicTimelineBar">
+                                    <div class="timeline-progress" id="musicTimelineProgress"><div class="timeline-dot"></div></div>
                                 </div>
-                                <div class="time-stamps"><span>1:11</span><span>3:03</span></div>
+                                <div class="time-stamps"><span id="musicCurrentTime">0:00</span><span id="musicTotalDuration">0:00</span></div>
                             </div>
                             <div class="playback-controls">
                                 <span class="side-btn" onclick="changeSong('prev')">⏮</span>
@@ -828,27 +778,16 @@ Dan kalau suatu saat kamu lagi ngerasa sendirian, jangan lupa kalau masih ada ak
                     </div>
                 </div>
 
-               <div id="card3" class="card locked">
-    <div class="card-front">🔒</div>
-    <div class="card-back">
-        <img src="photos/kicau.jpg" alt="Smile" class="card-avatar">
-        
-        <div class="card-back-title">Appreciation Card 🤍</div>
-        <p>
-           Fun fact:
-I really appreciate how you always check up on me or listen to my random stories.
-Di mata aku, kamu itu orang yang kangenan ya.
-Cute.
-So yeah,
-just want to let you know that you are doing great.
-And thank you for caring more than you probably realize.
-Kadang hal-hal kecil yang kamu lakuin itu ternyata lebih berarti dari yang kamu kira.
-So... thank you for being you. 🤍
-        </p>
-    </div>
-</div>
-
-            <div id="storyButtonWrapper">
+                <div id="card3" class="card locked">
+                    <div class="card-front">🔒</div>
+                    <div class="card-back">
+                        <img src="photos/kicau.jpg" alt="Smile" class="card-avatar">
+                        <div class="card-back-title">Appreciation Card 🤍</div>
+                        <p> Fun fact: I really appreciate how you always check up on me or listen to my random stories. Di mata aku, kamu itu orang yang kangenan ya. Cute. So yeah, just want to let you know that you are doing great. And thank you for caring more than you probably realize. Kadang hal-hal kecil yang kamu lakuin itu ternyata lebih berarti dari yang kamu kira. So... thank you for being you. 🤍 </p>
+                    </div>
+                </div>
+            </div>
+            <div id="storyButtonWrapper" class="hidden">
                 <button class="next-btn" onclick="goToPage(4)">ADUUU MALU BANGEt ➜</button>
             </div>
         </div>
@@ -858,51 +797,36 @@ So... thank you for being you. 🤍
         <div class="container story-container">
             <h2>The Honest Story</h2>
             <div class="story-block">
-                <p class="story-text">To be completely honest... waktu awal kamu confess (if you still remember), <em>I was genuinely shocked</em>.
-                Soalnya dari sikap kamu sehari-hari tuh beneran ga keliatan, <em>or maybe akunya aja kali ya yang terlalu ga peka? Haha.</em></p>
-                <p class="story-text">Terus lucu aja sih, waktu itu pas kamu sempet post cewek, aku mikirnya, 'Oh, okay, he has moved on.
-                Baguslah.' Eh, tahunya malah kaget banget tiba-tiba kamu DM aku lagi baru-baru ini, <em>kayak... wait, what? Haha.</em></p>
-                <p class="story-text"><em>But anyway, thank you</em> ya udah suka sama aku—since 2024, right?
-                <em>To be fair</em>, kadang aku malah takut <em>if the real me doesn't match your expectations</em>.
-                Dan sorry juga kalau jawaban aku waktu itu kayak orang bingung... normal human response lah ya, soalnya kadang <em>my bad avoidant traits suka tiba-tiba kambuh.</em></p>
-                <p class="story-text">Anyway... makasih banyak ya buat segala-galanya, terutama pemberian kamu ke aku akhir-akhir ini.
-                Tiba-tiba banget jadi anak Words of Affirmation gini, padahal ini part paling alay menurut aku wkwk.
-                Tapi ya sudahlah... apa sih yang enggak buat kamu 🤍</p>
+                <p class="story-text">To be completely honest... waktu awal kamu confess (if you still remember), <em>I was genuinely shocked</em>. Soalnya dari sikap kamu sehari-hari tuh beneran ga keliatan, <em>or maybe akunya aja kali ya yang terlalu ga peka? Haha.</em></p>
+                <p class="story-text">Terus lucu aja sih, waktu itu pas kamu sempet post cewek, aku mikirnya, 'Oh, okay, he has moved on. Baguslah.' Eh, tahunya malah kaget banget tiba-tiba kamu DM aku lagi baru-baru ini, <em>kayak... wait, what? Haha.</em></p>
+                <p class="story-text"><em>But anyway, thank you</em> ya udah suka sama aku—since 2024, right? <em>To be fair</em>, kadang aku malah takut <em>if the real me doesn't match your expectations</em>. Dan sorry juga kalau jawaban aku waktu itu kayak orang bingung... normal human response lah ya, soalnya kadang <em>my bad avoidant traits suka tiba-tiba kambuh.</em></p>
+                <p class="story-text">Anyway... makasih banyak ya buat segala-galanya, terutama pemberian kamu ke aku akhir-akhir ini. Tiba-tiba banget jadi anak Words of Affirmation gini, padahal ini part paling alay menurut aku wkwk. Tapi ya sudahlah... apa sih yang enggak buat kamu 🤍</p>
             </div>
             <button class="next-btn" onclick="goToPage(5)">MASIH ADA YANG ALAY ➜</button>
         </div>
     </section>
 
     <section id="page5" class="page">
-    <div class="container">
-        <h2>Satu Pesan Terakhir</h2>
-        
-        <div class="envelope-wrapper">
-            <div id="envelope">
-                <div class="envelope-flap"></div>
-                <div class="envelope-wings"></div>
-                <div class="envelope-heart-lock">💛</div>
+        <div class="container">
+            <h2>Satu Pesan Terakhir</h2>
+            <div class="envelope-wrapper">
+                <div id="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-wings"></div>
+                    <div class="envelope-heart-lock">💛</div>
+                </div>
+                <div class="letter">
+                    <h3>For You 🤍</h3>
+                    <p><em>If you're reading this, it means you've reached the end of the page, haha.</em></p>
+                    <p>Aku cuma mau bilang... <em>thank you for staying, even after knowing how complicated I can be sometimes.</em> Aku tau kita mungkin jarang ketemu karena kesibukan masing-masing, but <em>I really mean it when I say I enjoy your company.</em></p>
+                    <p><em>Let's just take our time,</em> jalani prosesnya pelan-pelan aja ya? <em>No pressure at all. But hopefully, we can make more fun memories together after this.</em>And one more thing... Aku harap semua hal yang lagi kamu perjuangin sekarang bisa berjalan dengan baik. Baik itu kerjaan, gym, ataupun target-target lain yang mungkin belum sempet kamu ceritain ke aku. I believe in you. Dan aku yakin banget kamu bisa mencapai semua hal yang sedang kamu usahain sekarang. One step at a time 🤍 </p>
+                    <div style="text-align: center;">
+                        <button id="openEnding" class="next-btn" style="margin-top: 15px; padding: 8px 20px; font-size: 0.85rem;">LAGI YH ➜</button>
+                    </div>
+                </div>
             </div>
-
-          <div class="letter">
-    <h3>For You 🤍</h3>
-    <p><em>If you're reading this, it means you've reached the end of the page, haha.</em></p>
-    <p>Aku cuma mau bilang... <em>thank you for staying, even after knowing how complicated I can be sometimes.</em> Aku tau kita mungkin jarang ketemu karena kesibukan masing-masing, but <em>I really mean it when I say I enjoy your company.</em></p>
-    <p><em>Let's just take our time,</em> jalani prosesnya pelan-pelan aja ya? <em>No pressure at all. But hopefully, we can make more fun memories together after this.</em>And one more thing...
-Aku harap semua hal yang lagi kamu perjuangin sekarang bisa berjalan dengan baik.
-Baik itu kerjaan, gym, ataupun target-target lain yang mungkin belum sempet kamu ceritain ke aku.
-I believe in you.
-Dan aku yakin banget kamu bisa mencapai semua hal yang sedang kamu usahain sekarang.
-One step at a time 🤍
-</p>
-    
-    <div style="text-align: center;">
-        <button id="openEnding" class="next-btn" style="margin-top: 15px; padding: 8px 20px; font-size: 0.85rem;">LAGI YH ➜</button>
-    </div>
-</div>
         </div>
-    </div>
-</section>
+    </section>
 
     <section id="page6" class="page">
         <div class="container ending-container">
@@ -910,17 +834,12 @@ One step at a time 🤍
                 <h2>Semangat terus kerja dan gym-nya sayangg! 💪🤍</h2>
                 <p><em>Please, don't push yourself too hard</em> kalau lagi ngerasa gaenak badan.</p>
                 <p><em>Especially</em> kalau lagi ngerokok, takutnya pingsan... <em>it’s going to be hard for me to reach you just to give you my</em> ciuman buatan, kan jauh wkwk.</p>
-                <p style="font-weight: 600; color: #db2777; margin-top: 10px;">
-                    <em>Pokoknya take good care of yourself ya.</em> Because honestly, I like seeing you healthy,
+                <p style="font-weight: 600; color: #db2777; margin-top: 10px;"> <em>Pokoknya take good care of yourself ya. Because honestly, I like seeing you healthy</em> </p>
             </div>
-
             <div class="character-box">
                 <img id="cuteCatGif" src="photos/peach-cat-heart-peach-cat-kiss.gif" alt="Peach Cat Cute Kiss">
             </div>
-
-            <div id="finalText">
-                Udah ya nanti kamu salting berat terus kangen haha (pd) 🤍
-            </div>
+            <div id="finalText"> Udah ya nanti kamu salting berat terus kangen haha (pd) 🤍 </div>
         </div>
     </section>
 
@@ -946,6 +865,16 @@ One step at a time 🤍
             pages.forEach(page => page.classList.remove('active'));
             const targetPage = document.getElementById(`page${pageNumber}`);
             if (targetPage) targetPage.classList.add('active');
+            
+            // FIX: Kaset dipastikan HANYA MUNCUL setelah masuk Page 3 (Pemilihan Card) ke atas
+            const fp = document.getElementById('floatingPlayer');
+            if (fp) {
+                if (pageNumber >= 3) {
+                    fp.classList.remove('hidden-player');
+                } else {
+                    fp.classList.add('hidden-player');
+                }
+            }
 
             if (pageNumber === 4) showStory();
             if (pageNumber === 6) startEndingAnimation();
@@ -969,13 +898,14 @@ One step at a time 🤍
             progress++;
             if (progressBar) progressBar.style.width = progress + "%";
             if (loadingPercent) loadingPercent.innerHTML = progress + "%";
-
             if (progress >= 100) {
                 clearInterval(loadingInterval);
                 if (instrumentalMusic) {
                     instrumentalMusic.play().catch(() => console.log("Autoplay music blocked."));
                 }
-                setTimeout(() => { goToPage(2); }, 800);
+                setTimeout(() => {
+                    goToPage(2);
+                }, 800);
             }
         }, 35);
 
@@ -987,181 +917,252 @@ One step at a time 🤍
             { title: "Sweet", artist: "Cigarettes After Sex", photo: "photos/bunga.jpg", file: "music/Sweet.mp3" },
             { title: "Everything You Are", artist: "Hindia", photo: "photos/hihi.jpg", file: "music/Hindia - everything u are.mp3" }
         ];
-        let currentSong = 0;
 
-        function loadSong(index) {
-            if (playlistPlayer) playlistPlayer.src = songs[index].file;
-            updateToastText(songs[index].title);
-            
-            document.getElementById("cardSongTitle").innerText = songs[index].title;
-            document.getElementById("cardSongArtist").innerText = songs[index].artist;
-            document.getElementById("cardSongPhoto").src = songs[index].photo;
+        let currentSongIndex = 0;
+        let isPlayingPlaylist = false;
 
-            document.getElementById("widgetTitle").innerText = songs[index].title;
-            document.getElementById("widgetArtist").innerText = songs[index].artist;
-            document.getElementById("widgetPhoto").src = songs[index].photo;
+        // --- Card Roulette Setup ---
+        const cards = document.querySelectorAll('.card');
+        const storyButtonWrapper = document.getElementById('storyButtonWrapper');
+        let openedCardsCount = 0;
+
+        cards.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                if (card.classList.contains('locked')) return;
+                
+                if (!card.classList.contains('fullscreen')) {
+                    card.classList.add('fullscreen');
+                    openCard(card.id);
+                    if (!card.classList.contains('counted')) {
+                        card.classList.add('counted');
+                        openedCardsCount++;
+                        unlockNextCard();
+                    }
+                } else {
+                    card.classList.remove('fullscreen');
+                }
+            });
+        });
+
+        function unlockNextCard() {
+            if (openedCardsCount === 1) {
+                const card2 = document.getElementById('card2');
+                if (card2) {
+                    card2.classList.remove('locked');
+                    const front = card2.querySelector('.card-front');
+                    if (front) front.innerHTML = "🎵";
+                }
+            } else if (openedCardsCount === 2) {
+                const card3 = document.getElementById('card3');
+                if (card3) {
+                    card3.classList.remove('locked');
+                    const front = card3.querySelector('.card-front');
+                    if (front) front.innerHTML = "🤍";
+                }
+            } else if (openedCardsCount === 3) {
+                if (storyButtonWrapper) storyButtonWrapper.classList.remove('hidden');
+            }
         }
-        loadSong(currentSong);
 
-        function updateToastText(title) {
-            const toast = document.getElementById("playerToast");
-            if(toast) {
-                toast.innerHTML = `Swipe ⟷ • ${title}`;
-                toast.classList.add("show-toast");
-                setTimeout(() => { toast.classList.remove("show-toast"); }, 2500);
+        function openCard(cardId) {
+            if (cardId === 'card2') {
+                if (!playlistPlayer.src || playlistPlayer.src === "") {
+                    playlistPlayer.src = songs[currentSongIndex].file;
+                    playlistPlayer.preload = "auto";
+                    
+                    // Event listeners untuk progress bar dan durasi otomatis
+                    playlistPlayer.addEventListener('timeupdate', updateProgressBarVisual);
+                    playlistPlayer.addEventListener('loadedmetadata', updateSongDurationVisual);
+                    playlistPlayer.addEventListener('ended', () => changeSong('next'));
+                }
+                
+                // FIX: Memastikan teks dan foto utama dimuat instan SEJAK AWAL card 2 diklik dibuka
+                updateUIDataInstan();
+
+                if (instrumentalMusic) {
+                    instrumentalMusic.pause();
+                }
+                
+                if (!isPlayingPlaylist) {
+                    togglePlaylistPlay();
+                }
             }
         }
 
         function togglePlaylistPlay() {
-            const widgetFrame = document.getElementById("widgetFrame");
-            const cardPlayBtn = document.getElementById("cardPlayBtn");
-            
-            if (playlistPlayer.paused) {
-                playlistPlayer.play();
-                if(widgetFrame) widgetFrame.classList.add("spinning");
-                if(cardPlayBtn) cardPlayBtn.innerText = "⏸";
-                updateWaveState(true);
+            const cardPlayBtn = document.getElementById('cardPlayBtn');
+            const waveBars = document.querySelectorAll('.wave-bar');
+            const widgetFrame = document.getElementById('widgetFrame');
+
+            if (!isPlayingPlaylist) {
+                playlistPlayer.play()
+                    .then(() => {
+                        isPlayingPlaylist = true;
+                        if (cardPlayBtn) cardPlayBtn.innerHTML = "⏸";
+                        waveBars.forEach(bar => bar.style.animationPlayState = 'running');
+                        if (widgetFrame) widgetFrame.classList.add('spinning');
+                    })
+                    .catch(err => console.log("Playback failed:", err));
             } else {
                 playlistPlayer.pause();
-                if(widgetFrame) widgetFrame.classList.remove("spinning");
-                if(cardPlayBtn) cardPlayBtn.innerText = "▶";
-                updateWaveState(false);
+                isPlayingPlaylist = false;
+                if (cardPlayBtn) cardPlayBtn.innerHTML = "▶";
+                waveBars.forEach(bar => bar.style.animationPlayState = 'paused');
+                if (widgetFrame) widgetFrame.classList.remove('spinning');
             }
+        }
+
+        // FIX: Fungsi render data instan buatan terpisah untuk menjamin kepastian pemuatan aset foto
+        function updateUIDataInstan() {
+            const cardSongPhoto = document.getElementById('cardSongPhoto');
+            const widgetPhoto = document.getElementById('widgetPhoto');
+            if (cardSongPhoto) cardSongPhoto.src = songs[currentSongIndex].photo;
+            if (widgetPhoto) widgetPhoto.src = songs[currentSongIndex].photo;
+
+            const cardSongTitle = document.getElementById('cardSongTitle');
+            const cardSongArtist = document.getElementById('cardSongArtist');
+            const widgetTitle = document.getElementById('widgetTitle');
+            const widgetArtist = document.getElementById('widgetArtist');
+
+            if (cardSongTitle) cardSongTitle.innerText = songs[currentSongIndex].title;
+            if (cardSongArtist) cardSongArtist.innerText = songs[currentSongIndex].artist;
+            if (widgetTitle) widgetTitle.innerText = songs[currentSongIndex].title;
+            if (widgetArtist) widgetArtist.innerText = songs[currentSongIndex].artist;
         }
 
         function changeSong(direction) {
-            const widgetFrame = document.getElementById("widgetFrame");
-            const cardPlayBtn = document.getElementById("cardPlayBtn");
             if (direction === 'next') {
-                currentSong = (currentSong + 1) % songs.length;
+                currentSongIndex = (currentSongIndex + 1) % songs.length;
             } else {
-                currentSong = (currentSong - 1 + songs.length) % songs.length;
+                currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
             }
-            loadSong(currentSong);
-            playlistPlayer.play();
-            if(widgetFrame) widgetFrame.classList.add("spinning");
-            if(cardPlayBtn) cardPlayBtn.innerText = "⏸";
-            updateWaveState(true);
+
+            playlistPlayer.src = songs[currentSongIndex].file;
+            playlistPlayer.load();
+
+            updateUIDataInstan();
+
+            const musicCurrentTime = document.getElementById('musicCurrentTime');
+            const musicTimelineProgress = document.getElementById('musicTimelineProgress');
+            if (musicCurrentTime) musicCurrentTime.innerText = "0:00";
+            if (musicTimelineProgress) musicTimelineProgress.style.width = "0%";
+
+            if (isPlayingPlaylist) {
+                playlistPlayer.play().catch(err => console.log("Playback interrupted:", err));
+            }
         }
 
-        function updateWaveState(running) {
-            document.querySelectorAll(".wave-bar").forEach(bar => {
-                bar.style.animationPlayState = running ? "running" : "paused";
+        // --- FUNGSI DURASI MENIT OTOMATIS DAN PROGRESS BAR BISA DIGESER ---
+        function formatDetikKeMenit(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        function updateSongDurationVisual() {
+            const musicTotalDuration = document.getElementById('musicTotalDuration');
+            if (musicTotalDuration && playlistPlayer) {
+                musicTotalDuration.innerText = formatDetikKeMenit(playlistPlayer.duration);
+            }
+        }
+
+        function updateProgressBarVisual() {
+            if (!playlistPlayer) return;
+            const musicCurrentTime = document.getElementById('musicCurrentTime');
+            const musicTimelineProgress = document.getElementById('musicTimelineProgress');
+
+            if (musicCurrentTime) {
+                musicCurrentTime.innerText = formatDetikKeMenit(playlistPlayer.currentTime);
+            }
+
+            if (musicTimelineProgress && playlistPlayer.duration) {
+                const percent = (playlistPlayer.currentTime / playlistPlayer.duration) * 100;
+                musicTimelineProgress.style.width = `${percent}%`;
+            }
+        }
+
+        // Logika Klik / Geser Timeline Bar Musik
+        document.addEventListener("DOMContentLoaded", function() {
+            const musicTimelineBar = document.getElementById('musicTimelineBar');
+            if (musicTimelineBar) {
+                musicTimelineBar.addEventListener('click', function(e) {
+                    if (!playlistPlayer || !playlistPlayer.duration) return;
+                    const rect = musicTimelineBar.getBoundingClientRect();
+                    const clickX = e.clientX - rect.left;
+                    const width = rect.width;
+                    const newTime = (clickX / width) * playlistPlayer.duration;
+                    playlistPlayer.currentTime = newTime;
+                });
+            }
+
+            // FIX: FITUR KEYBOARD LAPTOP (Panah Kanan untuk Next, Panah Kiri untuk Prev)
+            document.addEventListener('keydown', function(event) {
+                // Memastikan pintasan keyboard hanya aktif jika Card 2 sedang dibuka penuh (Fullscreen)
+                const card2 = document.getElementById('card2');
+                if (card2 && card2.classList.contains('fullscreen')) {
+                    if (event.key === 'ArrowRight') {
+                        changeSong('next');
+                    } else if (event.key === 'ArrowLeft') {
+                        changeSong('prev');
+                    }
+                }
             });
-        }
 
-        // --- Gesture Navigation ---
-        window.addEventListener('keydown', (e) => {
-            const floatingPlayer = document.getElementById("floatingPlayer");
-            if (floatingPlayer && !floatingPlayer.classList.contains("hidden")) {
-                if (e.key === "ArrowRight") changeSong('next');
-                else if (e.key === "ArrowLeft") changeSong('prev');
-                else if (e.key === " ") { e.preventDefault(); togglePlaylistPlay(); }
+            // FIX: FITUR SWIPE SENTUH LAYAR DI PONSEL PADA AREA FOTO MUSIK
+            const photoFrame = document.getElementById('cardSongPhotoFrame');
+            if (photoFrame) {
+                let startX = 0;
+                let endX = 0;
+
+                photoFrame.addEventListener('touchstart', function(e) {
+                    startX = e.touches[0].clientX;
+                }, false);
+
+                photoFrame.addEventListener('touchend', function(e) {
+                    endX = e.changedTouches[0].clientX;
+                    const swipeDistance = endX - startX;
+
+                    // Deteksi jika usapan jari melampaui batas sensitivitas jarak 50px
+                    if (Math.abs(swipeDistance) > 50) {
+                        if (swipeDistance > 0) {
+                            // Geser ke kanan -> lagu sebelumnya (Prev)
+                            changeSong('prev');
+                        } else {
+                            // Geser ke kiri -> lagu berikutnya (Next)
+                            changeSong('next');
+                        }
+                    }
+                }, false);
             }
         });
 
-        const floatingPlayer = document.getElementById("floatingPlayer");
-        let startX = 0;
-        if (floatingPlayer) {
-            floatingPlayer.addEventListener('click', (e) => {
-                if (Math.abs(startX - e.clientX) < 5) togglePlaylistPlay();
-            });
-            floatingPlayer.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
-            floatingPlayer.addEventListener('touchend', (e) => {
-                let endX = e.changedTouches[0].clientX;
-                handleSwipe(startX, endX);
-            });
-            floatingPlayer.addEventListener('mousedown', (e) => { startX = e.clientX; });
-            floatingPlayer.addEventListener('mouseup', (e) => {
-                let endX = e.clientX;
-                handleSwipe(startX, endX);
-            });
-        }
-
-        function handleSwipe(start, end) {
-            const threshold = 30;
-            if (start - end > threshold) changeSong('next');
-            else if (end - start > threshold) changeSong('prev');
-        }
-
-        function showPlayer() {
-            if (floatingPlayer) floatingPlayer.classList.remove("hidden");
-        }
-
-        // --- Card Operations ---
-        const card1 = document.getElementById("card1");
-        const card2 = document.getElementById("card2");
-        const card3 = document.getElementById("card3");
-        const storyButtonWrapper = document.getElementById("storyButtonWrapper");
-
-        if (storyButtonWrapper) storyButtonWrapper.style.display = "none";
-
-        if (card1) {
-            card1.addEventListener("click", () => {
-                if (!card1.classList.contains("fullscreen")) card1.classList.add("fullscreen");
-                else {
-                    card1.classList.remove("fullscreen");
-                    if (card2) {
-                        card2.classList.remove("locked");
-                        const front = card2.querySelector(".card-front");
-                        if (front) front.innerHTML = "💝";
-                    }
-                }
-            });
-        }
-
-        if (card2) {
-            card2.addEventListener("click", () => {
-                if (card2.classList.contains("locked")) return;
-                if (!card2.classList.contains("fullscreen")) {
-                    if (instrumentalMusic) { instrumentalMusic.pause(); instrumentalMusic.currentTime = 0; }
-                    showPlayer();
-                    togglePlaylistPlay();
-                    card2.classList.add("fullscreen");
-                } else {
-                    card2.classList.remove("fullscreen");
-                    if (card3) {
-                        card3.classList.remove("locked");
-                        const front = card3.querySelector(".card-front");
-                        if (front) front.innerHTML = "💝";
-                    }
-                }
-            });
-        }
-
-        if (card3) {
-            card3.addEventListener("click", () => {
-                if (card3.classList.contains("locked")) return;
-                if (!card3.classList.contains("fullscreen")) card3.classList.add("fullscreen");
-                else { card3.classList.remove("fullscreen"); if (storyButtonWrapper) storyButtonWrapper.style.display = "block"; }
-            });
-        }
-
+        // --- Story Text Fade In Delay ---
         function showStory() {
-            const texts = document.querySelectorAll(".story-text");
-            texts.forEach((text, index) => {
-                text.classList.remove("show");
-                setTimeout(() => { text.classList.add("show"); }, index * 700);
+            const storyTexts = document.querySelectorAll('.story-text');
+            storyTexts.forEach((text, index) => {
+                setTimeout(() => {
+                    text.classList.add('show');
+                }, index * 700);
             });
         }
 
         // --- Envelope Mechanism ---
-      // --- Fungsi Buka-Tutup Amplop ---
-const envelope = document.getElementById("envelope");
-if (envelope) {
-    envelope.addEventListener("click", () => {
-        envelope.classList.toggle("open");
-    });
-}
+        const envelope = document.getElementById("envelope");
+        if (envelope) {
+            envelope.addEventListener("click", () => {
+                envelope.classList.toggle("open");
+            });
+        }
 
-// --- Pindah Ke Halaman Akhir ---
-const openEnding = document.getElementById("openEnding");
-if (openEnding) {
-    openEnding.addEventListener("click", (e) => {
-        e.stopPropagation(); // Mencegah bug trigger amplop menutup kembali saat tombol diklik
-        goToPage(6);
-    });
-}
+        // --- Pindah Ke Halaman Akhir ---
+        const openEnding = document.getElementById("openEnding");
+        if (openEnding) {
+            openEnding.addEventListener("click", (e) => {
+                e.stopPropagation();
+                goToPage(6);
+            });
+        }
 
         // --- FINAL PAGE SURPRISE WITH REAL GIF ---
         function startEndingAnimation() {
@@ -1169,15 +1170,12 @@ if (openEnding) {
             const catMessage = document.getElementById("catMessage");
             const finalText = document.getElementById("finalText");
 
-            // 1. Teks kalimat atas muncul duluan dengan kalem
             if (catMessage) catMessage.classList.add("show");
 
-            // 2. GIF asli Kucing Lucu mengembang mulus tepat di tengah area kosong
             setTimeout(() => {
                 if (cuteCatGif) cuteCatGif.classList.add("show-gif");
             }, 800);
 
-            // 3. Kalimat penutup paling bawah muncul perlahan setelah GIF berjalan
             setTimeout(() => {
                 if (finalText) finalText.classList.add("show");
             }, 2500);
