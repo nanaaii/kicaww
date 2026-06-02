@@ -342,7 +342,7 @@
             margin-bottom: 12px; 
             border: 1.5px solid #2e2e2e;
             background: #f1f5f9;
-            touch-action: pan-y; /* Supaya geser layar tidak bentrok vertikal */
+            touch-action: pan-y; 
         }
         .music-card-photo img { width: 100%; height: 100%; object-fit: cover; }
         
@@ -355,6 +355,19 @@
         .song-info h3 { font-size: 18px; font-weight: 700; color: #1e293b; }
         .song-info p { font-size: 13px; color: #64748b; font-weight: 500; }
         .card-heart-icon { color: #f43f5e; font-size: 14px; }
+
+        /* Gaya Khusus Pesan Quotes Musik Dinamis */
+        .song-message-quote {
+            font-size: 13px;
+            color: #db2777;
+            font-style: italic;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-top: 8px;
+            margin-bottom: 5px;
+            border-left: 2.5px solid #ff8fb1;
+            padding-left: 8px;
+        }
 
         .waveform { 
             width: 100%;
@@ -553,7 +566,6 @@
             transform: scale(0.9); 
         }
 
-        /* Sembunyi total di awal (loading & page 2) */
         .hidden-player {
             display: none !important;
         }
@@ -725,7 +737,7 @@
             I just want you to know that I genuinely enjoyed spending time with you.
             Okayyy, enough being soft.
             Klik next ya sebelum aku jadi makin alay.
-            🤍✨ </p>
+            🤍 </p>
             <button class="next-btn" onclick="goToPage(3)">Next ➜</button>
         </div>
     </section>
@@ -757,6 +769,10 @@
                                     <span class="card-heart-icon">❤️</span>
                                 </div>
                                 <p id="cardSongArtist">Bruno Mars</p>
+                                
+                                <div class="song-message-quote" id="cardSongQuote">
+                                    This song reminds me of you.<br>Worth trying,<br>no matter how risky it is. 🤍
+                                </div>
                             </div>
                             <div class="waveform" id="cardWaveform">
                                 <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
@@ -819,7 +835,8 @@
                     <h3>For You 🤍</h3>
                     <p><em>If you're reading this, it means you've reached the end of the page, haha.</em></p>
                     <p>Aku cuma mau bilang... <em>thank you for staying, even after knowing how complicated I can be sometimes.</em> Aku tau kita mungkin jarang ketemu karena kesibukan masing-masing, but <em>I really mean it when I say I enjoy your company.</em></p>
-                    <p><em>Let's just take our time,</em> jalani prosesnya pelan-pelan aja ya? <em>No pressure at all. But hopefully, we can make more fun memories together after this.</em>And one more thing... Aku harap semua hal yang lagi kamu perjuangin sekarang bisa berjalan dengan baik. Baik itu kerjaan, gym, ataupun target-target lain yang mungkin belum sempet kamu ceritain ke aku. I believe in you. Dan aku yakin banget kamu bisa mencapai semua hal yang sedang kamu usahain sekarang. One step at a time 🤍 </p>
+                    <p><em>Let's just take our time,</em> jalani prosesnya pelan-pelan aja ya? <em>No pressure at all. But hopefully, we can make more fun memories together after this.</em></p> 
+                     <p><em>And one more thing... Aku harap semua hal yang lagi kamu perjuangin sekarang bisa berjalan dengan baik. Baik itu kerjaan, gym, ataupun target-target lain yang mungkin belum sempet kamu ceritain ke aku. I believe in you. Dan aku yakin banget kamu bisa mencapai semua hal yang sedang kamu usahain sekarang. One step at a time 🤍 </em></p>
                     <div style="text-align: center;">
                         <button id="openEnding" class="next-btn" style="margin-top: 15px; padding: 8px 20px; font-size: 0.85rem;">LAGI YH ➜</button>
                     </div>
@@ -833,7 +850,7 @@
             <div id="catMessage">
                 <h2>Semangat terus kerja dan gym-nya sayangg! 💪🤍</h2>
                 <p><em>Please, don't push yourself too hard</em> kalau lagi ngerasa gaenak badan.</p>
-                <p><em>Especially</em> kalau lagi ngerokok, takutnya pingsan... <em>it’s going to be hard for me to reach you just to give you my</em> ciuman buatan, kan jauh wkwk.</p>
+                <p><em>Especially</em> kalau lagi ngerokok, takutnya ripuh lagi <em>it’s going to be hard for me to reach you just to give you my</em> ciuman buatan, kan jauh wkwk.</p>
                 <p style="font-weight: 600; color: #db2777; margin-top: 10px;"> <em>Pokoknya take good care of yourself ya. Because honestly, I like seeing you healthy</em> </p>
             </div>
             <div class="character-box">
@@ -866,7 +883,6 @@
             const targetPage = document.getElementById(`page${pageNumber}`);
             if (targetPage) targetPage.classList.add('active');
             
-            // FIX: Kaset dipastikan HANYA MUNCUL setelah masuk Page 3 (Pemilihan Card) ke atas
             const fp = document.getElementById('floatingPlayer');
             if (fp) {
                 if (pageNumber >= 3) {
@@ -883,7 +899,7 @@
         // --- Loading Progress Handler ---
         const welcomeText = document.getElementById("welcomeText");
         if (localStorage.getItem("visited")) {
-            if (welcomeText) welcomeText.innerHTML = "Dibuka lagi? Kangen ya? 😏🤍";
+            if (welcomeText) welcomeText.innerHTML = "Dibuka lagi? Kangen ya? 😍🤍";
         } else {
             localStorage.setItem("visited", "yes");
         }
@@ -909,13 +925,43 @@
             }
         }, 35);
 
-        // --- Playlist System ---
+        // --- Playlist System dengan Penambahan Teks Dinamis ---
         const songs = [
-            { title: "Risk It All", artist: "Bruno Mars", photo: "photos/akuw.jpg", file: "music/Risk It All.mp3" },
-            { title: "About You", artist: "The 1975", photo: "photos/ak.jpg", file: "music/The 1975-About You.mp3" },
-            { title: "Be My Baby", artist: "The Ronettes", photo: "photos/iya.jpg", file: "music/Be My Baby - The Ronettes.mp3" },
-            { title: "Sweet", artist: "Cigarettes After Sex", photo: "photos/bunga.jpg", file: "music/Sweet.mp3" },
-            { title: "Everything You Are", artist: "Hindia", photo: "photos/hihi.jpg", file: "music/Hindia - everything u are.mp3" }
+            { 
+                title: "Risk It All", 
+                artist: "Bruno Mars", 
+                photo: "photos/akuw.jpg", 
+                file: "music/Risk It All.mp3",
+                quote: "This song reminds me of you.<br>Worth trying,<br>no matter how risky it is. 🤍"
+            },
+            { 
+                title: "About You", 
+                artist: "The 1975", 
+                photo: "photos/ak.jpg", 
+                file: "music/The 1975-About You.mp3",
+                quote: "You really like this song, huh?<br>And now,<br>it's always about you. 🤍"
+            },
+            { 
+                title: "Be My Baby", 
+                artist: "The Ronettes", 
+                photo: "photos/iya.jpg", 
+                file: "music/Be My Baby - The Ronettes.mp3",
+                quote: "The title says it all.<br>Need I say more? 😋"
+            },
+            { 
+                title: "Sweet", 
+                artist: "Cigarettes After Sex", 
+                photo: "photos/bunga.jpg", 
+                file: "music/Sweet.mp3",
+                quote: "This song feels so sweet.<br>Almost as sweet as me. 😖💗"
+            },
+            { 
+                title: "Everything You Are", 
+                artist: "Hindia", 
+                photo: "photos/hihi.jpg", 
+                file: "music/Hindia - everything u are.mp3",
+                quote: "Thank you for being you.<br>That's more than enough. 🤍"
+            }
         ];
 
         let currentSongIndex = 0;
@@ -970,13 +1016,11 @@
                     playlistPlayer.src = songs[currentSongIndex].file;
                     playlistPlayer.preload = "auto";
                     
-                    // Event listeners untuk progress bar dan durasi otomatis
                     playlistPlayer.addEventListener('timeupdate', updateProgressBarVisual);
                     playlistPlayer.addEventListener('loadedmetadata', updateSongDurationVisual);
                     playlistPlayer.addEventListener('ended', () => changeSong('next'));
                 }
                 
-                // FIX: Memastikan teks dan foto utama dimuat instan SEJAK AWAL card 2 diklik dibuka
                 updateUIDataInstan();
 
                 if (instrumentalMusic) {
@@ -1012,7 +1056,6 @@
             }
         }
 
-        // FIX: Fungsi render data instan buatan terpisah untuk menjamin kepastian pemuatan aset foto
         function updateUIDataInstan() {
             const cardSongPhoto = document.getElementById('cardSongPhoto');
             const widgetPhoto = document.getElementById('widgetPhoto');
@@ -1023,11 +1066,15 @@
             const cardSongArtist = document.getElementById('cardSongArtist');
             const widgetTitle = document.getElementById('widgetTitle');
             const widgetArtist = document.getElementById('widgetArtist');
+            
+            // Render teks pesan khusus (quotes) lagu secara instan
+            const cardSongQuote = document.getElementById('cardSongQuote');
 
             if (cardSongTitle) cardSongTitle.innerText = songs[currentSongIndex].title;
             if (cardSongArtist) cardSongArtist.innerText = songs[currentSongIndex].artist;
             if (widgetTitle) widgetTitle.innerText = songs[currentSongIndex].title;
             if (widgetArtist) widgetArtist.innerText = songs[currentSongIndex].artist;
+            if (cardSongQuote) cardSongQuote.innerHTML = songs[currentSongIndex].quote;
         }
 
         function changeSong(direction) {
@@ -1096,9 +1143,8 @@
                 });
             }
 
-            // FIX: FITUR KEYBOARD LAPTOP (Panah Kanan untuk Next, Panah Kiri untuk Prev)
+            // FITUR KEYBOARD LAPTOP (Panah Kanan untuk Next, Panah Kiri untuk Prev)
             document.addEventListener('keydown', function(event) {
-                // Memastikan pintasan keyboard hanya aktif jika Card 2 sedang dibuka penuh (Fullscreen)
                 const card2 = document.getElementById('card2');
                 if (card2 && card2.classList.contains('fullscreen')) {
                     if (event.key === 'ArrowRight') {
@@ -1109,7 +1155,7 @@
                 }
             });
 
-            // FIX: FITUR SWIPE SENTUH LAYAR DI PONSEL PADA AREA FOTO MUSIK
+            // FITUR SWIPE SENTUH LAYAR DI PONSEL PADA AREA FOTO MUSIK
             const photoFrame = document.getElementById('cardSongPhotoFrame');
             if (photoFrame) {
                 let startX = 0;
@@ -1123,13 +1169,10 @@
                     endX = e.changedTouches[0].clientX;
                     const swipeDistance = endX - startX;
 
-                    // Deteksi jika usapan jari melampaui batas sensitivitas jarak 50px
                     if (Math.abs(swipeDistance) > 50) {
                         if (swipeDistance > 0) {
-                            // Geser ke kanan -> lagu sebelumnya (Prev)
                             changeSong('prev');
                         } else {
-                            // Geser ke kiri -> lagu berikutnya (Next)
                             changeSong('next');
                         }
                     }
